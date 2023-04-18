@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ static('flow.css') }}" />
+    <title>{{ title }}</title>
+</head>
+<body>
+<div class="sidenav">
+  {% for link in navbar %}
+  <a href="{{ link[0] }}">{{ link[1] }}</a>
+  {% endfor %}
+</div>
+    <div class="content">{% block content %}{% endblock %}</div>
+    </div>
+</body>
+</html>
