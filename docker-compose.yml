@@ -15,14 +15,16 @@ services:
   web:
     build: .   
     ports:
-      - "8000:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+      - "8080:8080"
+    command: gunicorn cybertek.wsgi:application -b 0.0.0.0:8080
+    #command: python manage.py runserver 0.0.0.0:8000
+    
     volumes:
       - .:/code
     environment:
       - POSTGRES_NAME=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=cyber
+      - POSTGRES_PASSWORD=Rudih0jen
     depends_on:
       - db
       
