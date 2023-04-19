@@ -7,6 +7,9 @@ services:
       - postgres_data:/var/lib/postgresql/data
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=${SQL_USER}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD}
+      - POSTGRES_DATABASE=${SQL_DATABASE}
     ports:
       - "5432:5432"
     
@@ -16,15 +19,14 @@ services:
     build: .   
     ports:
       - "8080:8080"
-    command: gunicorn cybertek.wsgi:application -b 0.0.0.0:8080
-    #command: python manage.py runserver 0.0.0.0:8000
-    
+    command: ${START_SERVER}
+        
     volumes:
       - .:/code
     environment:
       - POSTGRES_NAME=postgres
-      - POSTGRES_USER=cyber
-      - POSTGRES_PASSWORD=Rudih0jen
+      - POSTGRES_USER=${SQL_USER}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD}
     depends_on:
       - db
       
