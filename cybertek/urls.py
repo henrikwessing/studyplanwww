@@ -18,8 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 
-print("Vi er i overordnet URL")
-
 urlpatterns = [
     path('studieplaner/',include('studyplan.urls')),
     path('admin/', admin.site.urls),

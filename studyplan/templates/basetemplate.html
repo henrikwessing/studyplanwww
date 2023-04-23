@@ -7,10 +7,10 @@
 <body>
 <div class="sidenav">
   {% for link in navbar %}
-  <a href="{{ link[0] }}">{{ link[1] }}</a>
+  <a href="{{ link['code'] }}">{{ link['name'] }}</a>
   {% endfor %}
 </div>
-    <div class="content">{% block content %}{% endblock %}</div>
-    </div>
+
+<div class="content">{% block content %}{% endblock %}</div>
 </body>
 </html>

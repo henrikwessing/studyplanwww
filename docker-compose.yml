@@ -18,7 +18,7 @@ services:
   web:
     build: .   
     ports:
-      - "8080:8080"
+      - "8000:${PORT}"
     command: ${START_SERVER}
         
     volumes:

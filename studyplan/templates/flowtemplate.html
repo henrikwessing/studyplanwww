@@ -1,35 +1,29 @@
 {% extends 'basetemplate.html' %}  
-{% macro cell(skema,sem,data) %}
-{% set kursus = data.loc[(data['SemesterSkema']==(sem~skema))] %}
-<td class="cell-{{ ''.join(kursus['Gruppe']) }}">
-<p>{{ ''.join(kursus['Kursus']) }}</p>
-<p>{{ ''.join(kursus['Navn']) }}</p>
-</td>
-{% endmacro %}
+{% macro cell(skema,sem,data) %}{% set kursus = data.loc[(data['SemesterSkema']==(sem~skema))] %}
+<td class="cell-{{ ''.join(kursus['Gruppe']) }}">{% set nr = ''.join(kursus['Kursus']) %}
+{% if nr|int != 0 %}<a href="https://kurser.dtu.dk/course/{{ nr }}" target="_blank">
+<p>{{ nr }}</p>{% else %}<p></p>{% endif %}
+<p>{{ ''.join(kursus['Navn']) }}</p></a>
+</td>{% endmacro %}
 
 {% block content %}
-<h2>{{ title }}
+<h2>{{ title }}</h2>
+<div class="signatur">
+{% if year == 2023 -%}
+	{% include 'signatur2023.html' %}
+{% else %}
+	{% include 'signatur2022.html' %}
+{% endif %}
+</div>
 	{% for k in range(0,3) -%}
 	{% set sem = k*2+1 -%}
 	<h2>{{ sem }}. semester</h2>
 	<h3>13 ugers perioden i efteråret</h3>
     <table>
-		<thead>
-		{% for i in ['Mandag','Tirsdag','Onsdag','Torsdag','Fredag'] %}
-			<td>{{  i  }} </td>
-		{% endfor %}
-		</tr>
-		</thead>
+		<thead>{% for i in ['Mandag','Tirsdag','Onsdag','Torsdag','Fredag'] %}<td>{{  i  }} </td>{% endfor %}</tr></thead>
         <tbody>
-		    <tr>
-		    {% for i in ['E1A','E3A','E5A','E2B','E4B'] %}
-				{{ cell(i,sem,data)}}
-			{% endfor %}
-			</tr><tr>   
-			{% for i in ['E2A','E4A','E5B','E1B','E3B'] %}
-				{{ cell(i,sem,data)}}
-			{% endfor %}
-			</tr>
+		    <tr>{% for i in ['E1A','E3A','E5A','E2B','E4B'] %} {{ cell(i,sem,data)}} {% endfor %}</tr>
+			<tr>{% for i in ['E2A','E4A','E5B','E1B','E3B'] %} {{ cell(i,sem,data)}} {% endfor %}</tr>
         </tbody>
     </table>
 	<h3>3 ugers periode vinter</h3>

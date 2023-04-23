@@ -1,7 +1,7 @@
 from django.db import models
 
 class Flows(models.Model):
-    id = models.CharField(max_length=2, primary_key=True)
+    code = models.CharField(max_length=2)
+    year = models.IntegerField()
     name = models.CharField(max_length=100)
     flw = models.BinaryField()
-    

@@ -12,5 +12,4 @@ import os
 from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'cybertek.settings')
-print("Vi er i wsgi.py")
 application = get_wsgi_application()
